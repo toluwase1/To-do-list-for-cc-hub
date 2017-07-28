@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+ 
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;    
+}
+
+ul li:nth-child(odd) {
+    background: #9ACDFF;
+}
+ul li:hover {
+    background: #ddd;
+}
+ul li.marked {
+    background: #888;
+    color: #9ACDFF;
+    text-decoration: line-through;
+}
+
+ul li.marked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+.close:hover {
+    background-color: black;
+    color: white;
+}
+.header {
+    background-color: #0086FF;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+}
+
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input {
+    border: none;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+}
+
+.buttonAdd {
+    padding: 10px;
+    width: 25%;
+    background: yellow;
+    color: black;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttonAdd:hover {
+    background-color:#9ACDFF;
+}
+
+.black{color: black;
+
+}
+
+input[placeholder]{
+  color: black;
+}
+
+</style>
+
+
+  <title> To Do List </title>
+</head>
+
+<div id="idOne" class="header">
+  <h2 class="black">To Do List for CC-Hub graduate Internship</h2>
+  </div>
+
+<body>
+<ul id="idTwo">
+  <li class="marked">Pray to God (5:00am-5:30am)</li>
+  <li>Have my Bathe (5:30am-6:00am)</li>
+  <li>Read techpoint.ng (6:00am-7:00am)</li>
+  <li>Take Breakfast (7:00am-7:30am)</li>
+  <li>Go to Hub (7:30am-8:00am)</li>
+  <li>Start Coding(8:00am-6:00pm)</li>
+</ul>
+<div id="idOne" class="header">
+  <input type="text" id="todoInput" placeholder="Enter Intended Activity Here and click the 'Add' Button">
+  <span onclick="newElement()" class="buttonAdd">Add More Activities</span>
+</div>
+ 
+
+    <script type="text/javascript">
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('marked');
+  }
+}, false);
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("todoInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("please input activity, then click ''ADD!");
+  } else {
+    document.getElementById("idTwo").appendChild(li);
+  }
+  document.getElementById("todoInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+} 
+    </script>
+
+  </body>
+
+</html>
